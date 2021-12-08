@@ -1,0 +1,44 @@
+.card {
+  border: 2px solid black;
+  margin: 40px 10px;
+  width: 300px;
+  background-color: rgb(251 211 137);
+}
+
+.card__id {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 5px;
+  background-color: #f79821;
+  border-bottom: 1px solid black;
+}
+
+.card__img {
+  width: 300px;
+}
+
+.card__desc {
+  text-align: center;
+}
+
+.card__title {
+  font-size: 2.5em;
+  text-transform: capitalize;
+}
+
+.card__button {
+  margin-top: 10px;
+  width: 296px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #f79821;
+  border: none;
+  border-top: 1px solid black;
+  transition: .5s;
+}
+
+.card__button:hover {
+    background-color: #11f557;
+    cursor: pointer;
+}
