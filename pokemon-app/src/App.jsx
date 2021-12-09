@@ -7,8 +7,8 @@ function App() {
   const headerTitle =
     'https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png'
   const defaultApiLimit = 20
+  const [offset, setOffset] = useState(0)
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon`
-  const [nextPageUrl, setNextPageUrl] = useState()
   const [pokemons, setPokemons] = useState([])
 
   const getLimitParams = (newLimit) => {
@@ -17,18 +17,10 @@ function App() {
 
   const getPokemons = (newLimit) => {
     return axios
-      .get(`${pokemonUrl}${getLimitParams(newLimit)}`)
-      .then((response) => response.data.results)
-  }
-
-  const getNextPokemonsUrl = (newLimit) => {
-    return axios
-      .get(`${pokemonUrl}${getLimitParams(newLimit)}`)
-      .then((response) => setNextPageUrl(response.data.next))
-  }
-
-  const getNextPokemons = () => {
-    return axios.get({ nextPageUrl }).then((response) => response.data.results)
+      .get(`${pokemonUrl}?offset=${offset}&${getLimitParams(newLimit)}`)
+      .then((response) => {
+        return response.data.results
+      })
   }
 
   const getPokemonDesc = (name) => {
@@ -50,23 +42,18 @@ function App() {
       .then((pokemons) => pokemons.map((p) => p.name))
       .then((pokemonsList) => getPokemonsDescList(pokemonsList))
       .then((result) => {
+        setOffset(offset + 20)
         setPokemons(result)
       })
   }, [])
 
   const onLoadMorePokemon = () => {
-    // getPokemons()
-    //   .then((pokemons) => pokemons.map((p) => p.name))
-    //   .then((pokemonsList) => getPokemonsDescList(pokemonsList))
-    //   .then((result) => {
-    //     setPokemons(result)
-    //   })
-    getNextPokemonsUrl()
-    getNextPokemons()
+    getPokemons()
       .then((pokemons) => pokemons.map((p) => p.name))
       .then((pokemonsList) => getPokemonsDescList(pokemonsList))
       .then((result) => {
-        setPokemons(result)
+        setOffset(offset + 20)
+        setPokemons((oldArray) => [...oldArray, ...result])
       })
   }
 
