@@ -19,11 +19,18 @@
 
 .card__desc {
   text-align: center;
+  
 }
 
 .card__title {
   font-size: 2.5em;
   text-transform: capitalize;
+  text-decoration: none;
+}
+
+.card__title:focus, :hover, :visited, :link, :active {
+  text-decoration: none;
+  color: #000;
 }
 
 .card__button {

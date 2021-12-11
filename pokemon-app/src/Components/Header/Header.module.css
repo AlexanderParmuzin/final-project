@@ -1,0 +1,37 @@
+.header {
+  width: 100%;
+  display: flex;
+
+  background-color: rgb(251 211 137);
+  padding: 20px;
+  border-bottom: 1px solid #f79821;
+}
+
+.title {
+  width: 50%;
+}
+
+.title img {
+  color: #f79821;
+  height: 70px;
+}
+
+.nav {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.nav button {
+  margin-right: 20px;
+  padding: 20px;
+  font-size: 1.5em;
+  background-color: #f79821;
+  transition: .5s;
+  border-radius: 20px;
+}
+
+.nav button:hover {
+  background-color: #11f557;
+  cursor: pointer;
+}
