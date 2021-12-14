@@ -4,11 +4,17 @@ import styles from './AllPokemonsPage.module.css'
 import { PokemonDataContext } from '../../PokemonDataContext'
 
 import PokemonCard from '../../shared/Components/PokemonCard/PokemonCard'
-import BtnLoadMore from '../../shared/Components/Buttons/LoadMoreBtn/BtnLoadMore'
+import BtnLoadMore from '../../shared/LoadMoreBtn/BtnLoadMore'
 
 export default function AllPokemonsPage() {
-  const { pokemons, loadMorePokemons, caughtPokemon } =
-    useContext(PokemonDataContext)
+  const {
+    pokemons,
+    loadMorePokemons,
+    caughtPokemon,
+    releasePokemon,
+    caughtPokemonList,
+  } = useContext(PokemonDataContext)
+
 
   return (
     <div>
@@ -18,9 +24,11 @@ export default function AllPokemonsPage() {
             <PokemonCard
               key={pokemon.id}
               id={pokemon.id}
+              isSelected={caughtPokemonList.has(pokemon.id)}
               name={pokemon.name}
               image={pokemon.sprites.other['official-artwork'].front_default}
               onCaughtPokemon={caughtPokemon}
+              onReleasePokemon={releasePokemon}
             />
           ))}
         </div>

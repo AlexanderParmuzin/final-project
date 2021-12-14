@@ -1,24 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { getPokemonsDataByName } from '../../PokeAPI/Api'
 import styles from './PokemonStatsPage.module.css'
+import { PokemonDataContext } from '../../PokemonDataContext'
 
 export default function PokemonPage() {
   const { name } = useParams()
+
+  const { pokemons, caughtPokemonList } = useContext(PokemonDataContext)
 
   const [loading, setLoading] = useState(true)
 
   const [pokemonsStats, setPokemonsStats] = useState([])
   const [pokemonsWeight, setPokemonsWeight] = useState()
   const [pokemonsHeight, setPokemonsHeight] = useState()
+  const [caughtPokemonData, setCaughtPokemonData] = useState()
 
   useEffect(() => {
-    getPokemonsDataByName(name).then((result) => {
-      setPokemonsStats(result)
-      setPokemonsWeight(result.weight / 10)
-      setPokemonsHeight(result.height * 10)
-      setLoading(false)
-    })
+    const selectedPokemon = pokemons.find((pokemon) => pokemon.name === name)
+
+    if (!selectedPokemon) {
+      return
+    }
+
+    setPokemonsStats(selectedPokemon)
+    setPokemonsWeight(selectedPokemon.weight / 10)
+    setPokemonsHeight(selectedPokemon.height * 10)
+
+    const caughtPokemonData = caughtPokemonList.get(selectedPokemon.id)
+    
+
+    setCaughtPokemonData(
+      caughtPokemonData ? 'Was catched ' + caughtPokemonData : `The ${name} is not caught`
+    )
+
+    setLoading(false)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name])
 
   if (loading) {
@@ -49,7 +65,7 @@ export default function PokemonPage() {
             </li>
             <li>Weight: {pokemonsWeight}kg</li>
             <li>Height: {pokemonsHeight}cm</li>
-            <li>Is it catched ?</li>
+            <li>{caughtPokemonData}</li>
           </ul>
         </div>
       </div>

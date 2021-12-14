@@ -9,11 +9,14 @@
 
 .title {
   width: 50%;
+  margin-top: 10px;
 }
 
 .title img {
   color: #f79821;
   height: 70px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .nav {
@@ -22,15 +25,32 @@
   justify-content: space-evenly;
 }
 
-.nav button {
-  padding: 20px;
-  font-size: 1.5em;
-  background-color: #f79821;
-  transition: .5s;
-  border-radius: 20px;
+.home__page,
+.pokeball {
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
 }
 
-.nav button:hover {
-  background-color: #11f557;
+.home__page:hover,
+.pokeball:hover,
+.title img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.home__page img,
+.pokeball img {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.home__page p,
+.pokeball p {
+  font-size: 1.5em;
+  padding-right: 30px;
   cursor: pointer;
 }
