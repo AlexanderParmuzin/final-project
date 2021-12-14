@@ -1,18 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styles from './PokemonCard.module.css'
 import { Link } from 'react-router-dom'
-import { PokemonCardContext } from '../../../PokemonCardContext'
 
-export default function PokemonCard(props) {
-  const { id, name, image } = useContext(PokemonCardContext)
-
-  const { toggleCatch } = useContext(PokemonCardContext)
-
-  const [isPressed, setIsPressed] = useState(false)
-
-  const catchHandler = () => {
-    setIsPressed(!isPressed)
-  }
+export default function PokemonCard({id, name, image, onCaughtPokemon}) {
 
   return (
     <div className={styles.card}>
@@ -24,18 +14,7 @@ export default function PokemonCard(props) {
         </div>
       </Link>
 
-
-
-      <button
-        className={styles.card__button}
-        disabled={isPressed}
-        onClick={() => {
-          catchHandler()
-          toggleCatch()
-        }}
-      >
-        {isPressed ? "Caught" : "Catch"}
-      </button>
+      <button className={styles.card__button} onClick= {() => onCaughtPokemon(id)} >Catch</button>
     </div>
   )
 }

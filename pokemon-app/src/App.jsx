@@ -12,7 +12,19 @@ import AllPokemonsPage from './Pages/AllPokemonsPage/AllPokemonsPage'
 function App() {
   const [offset, setOffset] = useState(0)
   const [pokemons, setPokemons] = useState([])
-  const [caughtPokemons, setCaughtPokemons] = useState([])
+
+  const [caughtPokemonList, setCaughtPokemonList] = useState({});
+
+  const caughtPokemon = (id) => {
+    console.log(caughtPokemonList);
+    caughtPokemonList[id]= new Date();
+    setCaughtPokemonList(caughtPokemonList)
+  }
+
+  const kickOutPokemon = (id) => {
+    delete caughtPokemonList[id];
+    setCaughtPokemonList(caughtPokemonList)
+  }
 
   useEffect(() => {
     getPokemonsData({ offset }).then((result) => {
@@ -22,16 +34,22 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const loadMorePokemons = () => {
+    getPokemonsData({ offset }).then((result) => {
+      setOffset(offset + 20)
+      setPokemons((oldArray) => [...oldArray, ...result])
+    })
+  }
+  console.log('test:', caughtPokemonList);
   return (
     <>
       <PokemonDataContext.Provider
         value={{
-          offset,
-          setOffset,
+          loadMorePokemons,
           pokemons,
-          setPokemons,
-          caughtPokemons,
-          setCaughtPokemons,
+          caughtPokemonList,
+          caughtPokemon,
+          kickOutPokemon,
         }}
       >
         <Header />
