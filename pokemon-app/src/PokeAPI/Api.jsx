@@ -12,12 +12,12 @@ const getPokemonName = ({ offset, newLimit }) => {
     })
 }
 
-const combineGettingPokemonsData = (pokemonNames) => {
-  return Promise.all(pokemonNames.map(getPokemonsDataByName))
+export const getPokemonsDataByName = (name) => {
+  return axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`).then(({ data }) => data)
 }
 
-const getPokemonsDataByName = (name) => {
-  return axios.get(`${pokemonUrl}/${name}`).then(({ data }) => data)
+const combineGettingPokemonsData = (pokemonNames) => {
+  return Promise.all(pokemonNames.map(getPokemonsDataByName))
 }
 
 export const getPokemonsData = ({ offset }) => {

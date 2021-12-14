@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import styles from './AllPokemonsPage.module.css'
-import PokemonCard from '../../Components/PokemonCard/PokemonCard'
+
+import { PokemonDataContext } from '../../PokemonDataContext'
+
+import PokemonCard from '../../shared/Components/PokemonCard/PokemonCard'
 import { getPokemonsData } from '../../PokeAPI/Api'
+import BtnLoadMore from '../../shared/Components/Buttons/LoadMoreBtn/BtnLoadMore'
+import { PokemonCardContext } from '../../PokemonCardContext'
 
 export default function AllPokemonsPage() {
-  const [offset, setOffset] = useState(0)
-  const [pokemons, setPokemons] = useState([])
-
-  useEffect(() => {
-    getPokemonsData({ offset }).then((result) => {
-      setOffset(offset + 20)
-      setPokemons(result)
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const { offset, setOffset, pokemons, setPokemons, caughtPokemons, setCaughtPokemons } = useContext(PokemonDataContext)
 
   const onLoadMorePokemon = () => {
     getPokemonsData({ offset }).then((result) => {
@@ -26,21 +22,35 @@ export default function AllPokemonsPage() {
     <div>
       <div>
         <div className={styles.container}>
-          {pokemons.map((pokemon, index) => {
-            return (
-              <PokemonCard
-                id={pokemon.id}
-                name={pokemon.name}
-                image={pokemon.sprites.other['official-artwork'].front_default}
-                key={index}
-              />
-            )
-          })}
+          {pokemons.map((pokemon, index) => (
+            <div key={pokemon.id}>
+              <PokemonCardContext.Provider
+                value={{
+                  id: pokemon.id,
+                  name: pokemon.name,
+                  image:
+                    pokemon.sprites.other['official-artwork'].front_default,
+                    toggleCatch: () => {
+                      const date = new Date();
+    
+                      setCaughtPokemons([
+                        ...caughtPokemons,
+                        {
+                          ...pokemon,
+                          date: date.toUTCString(),
+                          isCaught: true,
+                        },
+                      ]);
+                    },
+                }}
+              >
+                <PokemonCard  />
+              </PokemonCardContext.Provider>
+            </div>
+          ))}
         </div>
       </div>
-      <div className={styles.loadMore__button}>
-        <button onClick={onLoadMorePokemon}>Load more</button>
-      </div>
+      <BtnLoadMore onClick={onLoadMorePokemon} />
     </div>
   )
 }

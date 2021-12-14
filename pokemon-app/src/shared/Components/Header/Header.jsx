@@ -1,10 +1,12 @@
 import React from 'react'
 import styles from './Header.module.css'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Header() {
   const headerTitle =
     'https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png'
+
+  const navigate = useNavigate()
 
   return (
     <div>
@@ -14,12 +16,9 @@ export default function Header() {
         </div>
 
         <nav className={styles.nav}>
-          <Link to="/">
-            <button>Main Page</button>
-          </Link>
-          <Link to="/catched">
-            <button>Catched Pokemons</button>
-          </Link>
+          <button onClick={() => navigate('/')}>Main Page</button>
+
+          <button onClick={() => navigate('/catched')}>Catched Pokemons</button>
         </nav>
       </header>
     </div>

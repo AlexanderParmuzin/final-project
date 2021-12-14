@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import PokemonCard from '../../shared/Components/PokemonCard/PokemonCard'
+import { PokemonCardContext } from '../../PokemonCardContext'
 
-export default function CatchedPokemonsPage() {
-    return (
-        <div>
-            Catched Pokemons
-        </div>
-    )
+export default function CatchedPokemonsPage(props) {
+
+  const {caughtPokemons} = useContext(PokemonCardContext)
+
+  return <>
+    
+  </>
 }
