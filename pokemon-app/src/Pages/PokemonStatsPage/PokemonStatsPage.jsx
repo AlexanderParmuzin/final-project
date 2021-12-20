@@ -7,30 +7,22 @@ import styles from './PokemonStatsPage.module.css'
 export default function PokemonStatsPage() {
   const { name } = useParams()
 
+  const { caughtPokemonList } = useContext(PokemonDataContext)
+
   const [loading, setLoading] = useState(true)
-
-  const { pokemons, caughtPokemonList } = useContext(PokemonDataContext)
-
   const [pokemonsStats, setPokemonsStats] = useState([])
-  const [pokemonsWeight, setPokemonsWeight] = useState()
-  const [pokemonsHeight, setPokemonsHeight] = useState()
-  const [caughtPokemonData, setCaughtPokemonData] = useState()
+  const [caughtPokemonsDate, setCaughtPokemonsDate] = useState()
 
   useEffect(() => {
     getPokemonsDataByName(name).then((result) => {
       setPokemonsStats(result)
-      setPokemonsWeight(result.weight / 10)
-      setPokemonsHeight(result.height * 10)
 
-      const selectedPokemon = pokemons.find((pokemon) => pokemon.name === name)
-      if (!selectedPokemon) {
-        setCaughtPokemonData(`The ${name} is not caught`)
-        return setLoading(false)
-      }
-      const caughtPokemonData = caughtPokemonList.get(selectedPokemon.id)
-      setCaughtPokemonData(
-        caughtPokemonData
-          ? 'Was catched ' + caughtPokemonData
+      const selectedPokemon = result
+
+      const caughtPokemonsDate = caughtPokemonList.get(selectedPokemon.id)
+      setCaughtPokemonsDate(
+        caughtPokemonsDate
+          ? 'Was caught ' + caughtPokemonsDate
           : `The ${name} is not caught`
       )
       setLoading(false)
@@ -77,9 +69,9 @@ export default function PokemonStatsPage() {
                 {pokemonsStats.types.length > 1 ? 'Types: ' : 'Type: '}
                 {pokemonsStats.types.map((item) => item.type.name).join(', ')}
               </li>
-              <li>Weight: {pokemonsWeight}kg</li>
-              <li>Height: {pokemonsHeight}cm</li>
-              <li>{caughtPokemonData}</li>
+              <li>Weight: {pokemonsStats.weight / 10}kg</li>
+              <li>Height: {pokemonsStats.height * 10}cm</li>
+              <li>{caughtPokemonsDate}</li>
 
               <div className={styles.goBackBtn}>
                 <button onClick={goBack}>

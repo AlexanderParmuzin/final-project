@@ -6,16 +6,15 @@ import Header from './shared/Components/Header/Header'
 import { getPokemonsData } from './PokeAPI/Api'
 import { PokemonDataContext } from './PokemonDataContext'
 import PokemonStatsPage from './Pages/PokemonStatsPage/PokemonStatsPage'
-import CatchedPokemonsPage from './Pages/CatchedPokemons/CatchedPokemonsPage'
+import CatchedPokemonsPage from './Pages/CaughtPokemons/CaughtPokemonsPage'
 import AllPokemonsPage from './Pages/AllPokemonsPage/AllPokemonsPage'
 
 function App() {
   const [offset, setOffset] = useState(0)
   const [pokemons, setPokemons] = useState([])
-
   const [caughtPokemonList, setCaughtPokemonList] = useState(new Map())
 
-  const caughtPokemon = (id) => {
+  const catchPokemon = (id) => {
     let date = new Date().toLocaleString('en-US')
 
     caughtPokemonList.set(id, date)
@@ -36,7 +35,7 @@ function App() {
 
   useEffect(() => {
     loadMorePokemons()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -46,7 +45,7 @@ function App() {
           loadMorePokemons,
           pokemons,
           caughtPokemonList,
-          caughtPokemon,
+          catchPokemon,
           releasePokemon,
         }}
       >

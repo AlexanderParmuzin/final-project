@@ -10,7 +10,7 @@ export default function AllPokemonsPage() {
   const {
     pokemons,
     loadMorePokemons,
-    caughtPokemon,
+    catchPokemon,
     releasePokemon,
     caughtPokemonList,
   } = useContext(PokemonDataContext)
@@ -27,7 +27,7 @@ export default function AllPokemonsPage() {
               isSelected={caughtPokemonList.has(pokemon.id)}
               name={pokemon.name}
               image={pokemon.sprites.other['official-artwork'].front_default}
-              onCaughtPokemon={caughtPokemon}
+              onCatchPokemon={catchPokemon}
               onReleasePokemon={releasePokemon}
             />
           ))}

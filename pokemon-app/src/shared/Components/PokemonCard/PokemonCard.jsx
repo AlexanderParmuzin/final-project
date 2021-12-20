@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './PokemonCard.module.css'
 import { Link } from 'react-router-dom'
 
-export default function PokemonCard({id, name, image, onCaughtPokemon, isSelected, onReleasePokemon}) {
+export default function PokemonCard({id, name, image, onCatchPokemon, isSelected, onReleasePokemon}) {
   return (
     <div className={styles.card}>
 
@@ -18,7 +18,7 @@ export default function PokemonCard({id, name, image, onCaughtPokemon, isSelecte
       {
         isSelected
           ? <button className={styles.card__button} onClick={() => onReleasePokemon(id)}>Release</button>
-          : <button className={styles.card__button} onClick={() => onCaughtPokemon(id)}>Catch</button>
+          : <button className={styles.card__button} onClick={() => onCatchPokemon(id)}>Catch</button>
       }
     </div>
   )
