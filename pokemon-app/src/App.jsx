@@ -29,7 +29,7 @@ function App() {
 
   const loadMorePokemons = () => {
     getPokemonsData({ offset }).then((result) => {
-      setOffset(offset + 30)
+      setOffset(offset + 20)
       setPokemons((oldArray) => [...oldArray, ...result])
     })
   }

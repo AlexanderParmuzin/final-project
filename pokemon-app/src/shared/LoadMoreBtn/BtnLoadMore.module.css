@@ -1,6 +1,7 @@
 .loadMore__button {
   margin-top: 20px;
   text-align: center;
+  
 }
 
 .loadMore__button button {
@@ -8,11 +9,12 @@
   height: 50px;
   font-size: 20px;
   font-weight: bold;
-  border: 1px solid #f79821;
+  border: none;
   text-transform: uppercase;
   margin-bottom: 20px;
   background-color: rgb(251 211 137);
   transition: 0.5s;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .loadMore__button button:hover {

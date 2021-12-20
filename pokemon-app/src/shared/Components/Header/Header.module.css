@@ -1,28 +1,28 @@
 .header {
-  width: 100%;
   display: flex;
-
   background-color: rgb(251 211 137);
   padding: 20px;
-  border-bottom: 1px solid #f79821;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .title {
-  width: 50%;
   margin-top: 10px;
+  width: 60%;
 }
 
 .title img {
   color: #f79821;
-  height: 70px;
+  height: 80px;
   cursor: pointer;
   transition: 0.2s;
 }
 
 .nav {
-  width: 50%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .home__page,
@@ -30,13 +30,48 @@
   display: flex;
   align-items: center;
   transition: 0.2s;
+  cursor: pointer;
+}
+
+.pokeball__image,
+.pika__image {
+  position: relative;
+  width: 120px; /* can be omitted for a regular non-lazy image */
+  max-width: 100%;
+}
+
+.pokeball__image img.pokeball__opened,
+.pika__image img.pika__happy {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.pokeball:hover img.pokeball__opened {
+  opacity: 1;
+}
+
+.home__page:hover img.pika__happy {
+  opacity: 1;
+}
+
+.home__page:hover img.pika__sleep {
+  opacity: 0;
 }
 
 .home__page:hover,
-.pokeball:hover,
+.pokeball:hover {
+  text-shadow: 1px 1px 2px #131516;
+  font-weight: bold;
+}
+
 .title img:hover {
   opacity: 0.5;
-  cursor: pointer;
 }
 
 .home__page img,
@@ -55,10 +90,12 @@
   cursor: pointer;
 }
 
-@media (max-width: 700px) {
+/* TABLET */
+
+@media (max-width: 768px) {
   .title {
-    width: 50%;
     margin-top: 37px;
+    width: 50%;
   }
 
   .home__page,
@@ -69,8 +106,29 @@
     transition: 0.2s;
     text-align: center;
   }
-  
+
   .pokeball img {
     margin-right: 30px;
+  }
+}
+
+/* 425px */
+
+@media (max-width: 425px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title {
+    margin-bottom: 50px;
+  }
+
+  .title img {
+    height: 80px;
+  }
+
+  .pokeball {
+    margin-left: 70px;
   }
 }
