@@ -11,6 +11,7 @@
   font-size: 1.7em;
   padding: 5px;
   background-color: #f79821;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .card__body {
@@ -57,6 +58,7 @@
   transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
   background-size: 200% auto;
   font-family: 'Ubuntu';
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .card__button:hover {
